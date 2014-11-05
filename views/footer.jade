@@ -1,0 +1,17 @@
+footer
+script(src="/socket.io/socket.io.js")
+script.
+  (function(){  
+    var socket = io.connect(),
+      countdownElement = document.querySelector('#countdown'),
+      setText = function(val){
+        countdownElement.textContent = val;
+      };
+    socket.emit('ready');
+    socket.on('countdown', function(data) {
+      setText(data.value);
+    });
+    socket.on('complete', function(data) {
+      setText(data.value);
+    });
+  }());
