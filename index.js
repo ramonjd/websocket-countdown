@@ -1,8 +1,12 @@
 var express = require('express.io');
 var Countdown = require('./countdown');
 var app = express().http().io();
+var lessMiddleware = require('less-middleware')
 
 var clock = new Countdown('December 19, 2014 17:00:00');
+
+app.use(lessMiddleware(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 app.set('view engine', 'jade');
 

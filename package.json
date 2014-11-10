@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express.io": "^1.1.13",
-    "jade": "^1.7.0"
+    "jade": "^1.7.0",
+    "less-middleware": "^1.0.4"
   }
 }
