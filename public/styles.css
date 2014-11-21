@@ -1,1 +1,1 @@
-@import "kube.min.css";body{background:#222}body h1{color:white}
+@import "kube.min.css";body{background:#222;color:white}body h1{color:white}body #d3 rect{fill:white}body #d3 text{fill:white;font-size:2em}

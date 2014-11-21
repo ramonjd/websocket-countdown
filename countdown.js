@@ -20,7 +20,11 @@ var divider = ', ',
 
             return {
                 delta : delta,
-                date : countdownArray.join(divider)
+                msg : countdownArray.join(divider),
+                days : days,
+                hours : hours,
+                mins : minutes,
+                secs : seconds
             };
     };
 
@@ -46,9 +50,7 @@ Countdown.prototype.init = function(obj) {
 
     this.rendered = getRenderedDate(this.targetDate);
 
-    this.emit('tick', {
-        value: this.rendered.date
-    });
+    this.emit('tick', this.rendered);
 
     this.timer = setInterval(this.render.bind(this), 1000);
 
@@ -64,9 +66,7 @@ Countdown.prototype.render = function() {
         this.emit('complete');
         
     } else {
-        this.emit('tick', {
-            value: this.rendered.date
-        });
+        this.emit('tick', this.rendered);
     }
     return this;
 };
