@@ -11,22 +11,27 @@
 
   var d3 = window.d3,
     data,
-    width = 650,
-    barHeight = 50,
+    width = 750,
+    height = 350,
+    barWidth = 100,
+    barHeight = 100,
     data = {
       'units': [
+
         {
           'name': 'days',
-          'value': 0
-        },
-        {
-          'name': 'mins',
           'value': 0
         },
         {
           'name': 'hours',
           'value': 0
         },
+        
+         {
+          'name': 'mins',
+          'value': 0
+        },
+        
         {
           'name': 'secs',
           'value': 0
@@ -34,19 +39,22 @@
       ]
     },
       
-    x = d3.scale.linear()
-      .range([0, 600]),
-      chart = d3.select('#d3')
-      .attr('width', width),
+    y = d3.scale.linear()
+      .range([0, 250]),
+ 
+
+      
+    chart = d3.select('#d3')
+      .attr('height', height),
       
     bar = chart.selectAll('g')
       .data(data.units)
       .enter().append('g')
       .attr('transform', function (d, i) {
-        return 'translate(0,' + i * barHeight + ')';
+        return 'translate(' + i * barHeight + ', 0)';
       }),
       
-    updateChart = function (obj) {
+      updateChart = function (obj) {
         data.units.forEach(function (item) {
           item.value = obj[item.name];
         });
@@ -54,39 +62,42 @@
         d3.selectAll('rect')
           .data(data.units)
           .transition()
-          .attr('width', function (d) {
-            return d.value * 10;
-          });
+          .attr('height', function (d) {
+            return d.value * 5;
+          }).attr('width', barWidth);
       
           d3.selectAll('text')
           .data(data.units)
           .transition()
-              .attr('x', function (d) {
-      return d.value * 10 + 10;
-    })
+           .attr('y', function (d) {
+              return d.value * 5 - 12;
+            })
           .text(function (d) {
             return d.value;
           });
     };
 
-
-  x.domain([0, d3.max(data.units, function (d) {
+  
+  y.domain([0, d3.max(data.units, function (d) {
     return d.value;
   })]);
 
-  chart.attr('height', barHeight * data.units.length);
+  chart.attr('width', (barWidth + 2) * data.units.length);
 
   bar.append('rect')
-    .attr('width', function (d) {
+    .attr('height', function (d) {
       return d.value;
     })
-    .attr('height', barHeight - 1);
+    .attr('width', barWidth)
+      .attr('x', function (d, i) {
+              return 2*i;
+        });
 
   bar.append('text')
-    .attr('x', function (d) {
-     return d.value * 10 + 10;
+    .attr('y', function (d) {
+      return d.value - 10;
     })
-    .attr('y', barHeight / 2)
+    .attr('x', 35)
     .attr('dy', '.35em')
     .text(function (d) {
       return d.value;
