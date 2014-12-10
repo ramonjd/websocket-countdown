@@ -1,2 +1,1 @@
-@import "kube.min.css";body{padding:2em;background:black;color:white}body .label{padding:1em}body .label h1{color:white
-      margin:0}body #d3 rect{fill:#ffc800}body #d3 text{fill:black;font-size:2.4em;font-weight:700}
+@import "kube.min.css";body{padding:2em;background:#8ccf4d;color:white}body .label{background:#ec1c1c;padding:1em}body .label h1#countdown{color:white;margin:0}body #d3 rect,body .label{fill:#ec1c1c}body #d3 text{fill:white;font-size:2.4em;font-weight:700}
